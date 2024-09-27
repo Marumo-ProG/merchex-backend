@@ -19,13 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from rest_framework import routers
-from listings.views import BandViewSet, EventViewSet, ListingViewSet
+from listings.views import BandViewSet, EventViewSet, ListingViewSet, EventDetailViewSet
 from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r"events", EventViewSet)
 router.register(r"bands", BandViewSet)
 router.register(r"listings", ListingViewSet)
+router.register(r"event-details", EventDetailViewSet, basename="eventdetail")
 
 
 urlpatterns = [
