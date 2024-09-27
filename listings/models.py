@@ -1,11 +1,20 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
+import datetime
+
+current_year = datetime.date.today().year
 
 
 # Create your models here.
 class Band(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    year_formed = models.DateField()
+    year_formed = models.PositiveIntegerField(
+        validators=[
+            MinValueValidator(1900),  # Replace with a reasonable minimum year
+            MaxValueValidator(current_year),
+        ]
+    )
     genre = models.CharField(max_length=50)
     photo = models.ImageField(upload_to="bands/", null=True, blank=True)
     is_active = models.BooleanField(default=True)
