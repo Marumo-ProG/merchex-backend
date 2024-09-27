@@ -22,7 +22,7 @@ class Event(models.Model):
     date = models.DateField()
     time = models.TimeField()
     location = models.CharField(max_length=100)
-    band = models.ForeignKey(Band, on_delete=models.CASCADE)
+    band = models.ForeignKey(Band, on_delete=models.SET_NULL, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -37,6 +37,7 @@ class Listing(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     photo = models.ImageField()
     is_active = models.BooleanField(default=True)
+    event = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
